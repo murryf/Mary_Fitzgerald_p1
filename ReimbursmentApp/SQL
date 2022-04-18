@@ -2,10 +2,11 @@ CREATE database expensedb;
 
 create table expenses(
 	expense_id serial primary key,
-	employee_src int foreign key references employees(employee_id),
+	employee_src int,
 	description varchar(500),
 	ammount int check (ammount > 0),
-	approval varchar(10)
+	approval varchar(10),
+	foreign key (employee_src) references employees(employee_id)
 );
 
 create table employees(
