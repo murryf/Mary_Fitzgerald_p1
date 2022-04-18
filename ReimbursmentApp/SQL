@@ -1,0 +1,15 @@
+CREATE database expensedb;
+
+create table expenses(
+	expense_id serial primary key,
+	description varchar(500),
+	ammount int check (ammount > 0),
+	reviewed bit, --must be 0 to be approved
+	approved bit  --no setters permitted
+);
+
+create table employees(
+	employee_id serial primary key,
+	f_name varchar(20),
+	l_name varchar(30)
+);
