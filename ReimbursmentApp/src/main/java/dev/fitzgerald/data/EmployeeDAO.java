@@ -9,7 +9,7 @@ public interface EmployeeDAO {
     //read
     Employee getEmployeeById(int id);
     //update
-    Employee updateEmployee(Employee employee);
+    boolean updateEmployee(Employee employee);
     //delete
-    boolean deleteEmployee(int id);
+    boolean deleteEmployeeById(int id);
 }
