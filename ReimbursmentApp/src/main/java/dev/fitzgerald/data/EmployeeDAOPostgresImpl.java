@@ -60,19 +60,21 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
     }
 
 
-    public boolean updateEmployee(Employee employee) {
+    public Employee updateEmployee(Employee employee) {
             try{
                 Connection conn = ConnectionUtil.createConnection();
                 String sql = "update employees set fname = ?, lname = ? where employee_id = ?";
+                assert conn != null;
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, employee.getFName());
                 ps.setString(2, employee.getLName());
                 ps.setInt(3,employee.getEmployeeID());
                 ps.execute();
-                return true;
+                return employee;
 
-            } catch (SQLException e) {
-                return false;
+            } catch (SQLException | NullPointerException e) {
+                e.printStackTrace();
+                return null;
             }
 
     }

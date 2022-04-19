@@ -31,7 +31,8 @@ public class EmployeeDAOTests {
     @Test
     @Order(3)
     void updateEmployee(){
-        testEmployee.setFname("Mark");
-        Assertions.assertTrue(employeeDAO.updateEmployee(testEmployee));
+        testEmployee.setFname("Monica");
+        employeeDAO.updateEmployee(testEmployee);
+        Assertions.assertNotEquals(0, testEmployee.getEmployeeID());
     }
 }
