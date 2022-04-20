@@ -1,10 +1,10 @@
-package dev.fitzgerald.data;
+package dev.fitzgerald.service;
 
 import dev.fitzgerald.entities.Expense;
 
 import java.util.List;
 
-public interface ExpenseDAO {
+public interface ExpenseService {
 
     //Create
     Expense createExpense(Expense expense);

@@ -1,6 +1,5 @@
 package dev.fitzgerald.daotests;
 
-//import dev.fitzgerald.data.EmployeeDAO;
 import dev.fitzgerald.data.EmployeeDAOPostgresImpl;
 import dev.fitzgerald.entities.Employee;
 import org.junit.jupiter.api.*;
@@ -34,5 +33,12 @@ public class EmployeeDAOTests {
         testEmployee.setFname("Monica");
         employeeDAO.updateEmployee(testEmployee);
         Assertions.assertNotEquals(0, testEmployee.getEmployeeID());
+    }
+
+    @Test
+    @Order(4)
+    void deleteEmployee() {
+        Assertions.assertTrue(employeeDAO.deleteEmployeeById(18));
+
     }
 }

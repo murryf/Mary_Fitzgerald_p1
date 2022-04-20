@@ -4,6 +4,8 @@ import dev.fitzgerald.entities.Employee;
 import dev.fitzgerald.utilities.ConnectionUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDAOPostgresImpl implements EmployeeDAO{
 
@@ -35,7 +37,11 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
 
 
     }
-
+    /**
+     * Method to retrieve an employee by their unique ID
+     * @param id the unique ID
+     * @return the corresponding employee object
+     * */
     @Override
     public Employee getEmployeeById(int id) {
 
@@ -59,7 +65,42 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
         }
     }
 
+    /**
+     * Method to return all the employees in a table
+     * @return the List of employees
+     * */
+    @Override
+    public List<Employee> getAllEmployees() {
 
+        try {
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "select * from employees";
+            assert conn != null;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            List<Employee> employees = new ArrayList<Employee>();
+            while(rs.next()){
+                Employee emp = new Employee("","", 0);
+                emp.setID(rs.getInt("employee_id"));
+                emp.setFname(rs.getString("fname"));
+                emp.setLname(rs.getString("lname"));
+                employees.add(emp);
+            }
+            return employees;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    /**
+     * Method to update an employee first or last name.
+     * @param employee the unsaved employee to be stored in the database
+     * @returns the same employee if the database update worked, null if it did not
+     * */
     public Employee updateEmployee(Employee employee) {
             try{
                 Connection conn = ConnectionUtil.createConnection();
@@ -79,9 +120,30 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
 
     }
 
+    /**
+     * Method to delete an employee by unique id
+     * @param id the unique id number
+     * @return the boolean status of execution. True if deleted, false if not deleted
+     * */
     @Override
     public boolean deleteEmployeeById(int id) {
-        return false;
+
+        try {
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "delete from employees where employee_id = ?";
+            assert conn != null;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            if(getEmployeeById(id) != null) {
+                ps.execute();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
