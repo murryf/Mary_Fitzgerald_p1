@@ -51,12 +51,16 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             assert conn != null;
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,id);
-            ResultSet rs = ps.executeQuery();
-            rs.next();
+            ps.execute();
+            if(ps.getGeneratedKeys() != null) {
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
 
-            return new Employee(rs.getString("fname"),
-                    rs.getString("lname"), rs.getInt("employee_id"));
-
+                return new Employee(rs.getString("fname"),
+                        rs.getString("lname"), rs.getInt("employee_id"));
+            } else {
+                return null;
+            }
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
             return null;

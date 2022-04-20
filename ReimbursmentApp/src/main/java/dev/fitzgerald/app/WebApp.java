@@ -5,6 +5,7 @@ import dev.fitzgerald.data.EmployeeDAO;
 import dev.fitzgerald.data.EmployeeDAOPostgresImpl;
 import dev.fitzgerald.data.ExpenseDAOPostgresImpl;
 import dev.fitzgerald.entities.Employee;
+import dev.fitzgerald.entities.Expense;
 import dev.fitzgerald.service.ExpenseService;
 import dev.fitzgerald.service.ExpenseServiceImpl;
 import dev.fitzgerald.service.ReimbursementServiceImpl;
@@ -51,8 +52,9 @@ public class WebApp {
         //read one
         app.get("/employees/{id}", context ->{
             int id = Integer.parseInt(context.pathParam("id"));
-            String employeeJSON = gson.toJson(services.getEmployeeById(id));
-            if(employeeJSON!=null) {
+            if(services.getEmployeeById(id).getEmployeeID() == id){
+                String employeeJSON = gson.toJson(services.getEmployeeById(id));
+                context.status(201);
                 context.result(employeeJSON);
             } else {
                 context.status(404);
@@ -96,14 +98,29 @@ public class WebApp {
         });
 
 //  _______________________Expense_Section______________________________________
-//
-//        /**
-//         * Post an expense
-//         * */
-//        //post an expense
-//        app.post("/expenses", null);
-//
-//
+
+        /**
+         * Post an expense
+         * */
+        //post an expense
+        app.post("/expenses", context -> {
+            String body = context.body();
+            Expense expense = gson.fromJson(body, Expense.class);
+            Expense saved = expenseService.createExpense(expense);
+            context.status(201);
+            String expenseJSON = gson.toJson(expense);
+            context.result(expenseJSON);
+        });
+
+        app.get("/expenses/{id}", context ->{
+            int id = Integer.parseInt(context.pathParam("id"));
+            String expenseJSON = gson.toJson(expenseService.getExpenseById(id));
+            if(expenseJSON!=null) {
+                context.result(expenseJSON);
+            } else {
+                context.status(404);
+            }
+        });
 //
 //        /**
 //         * Delete an expense item. Must be in pending status
