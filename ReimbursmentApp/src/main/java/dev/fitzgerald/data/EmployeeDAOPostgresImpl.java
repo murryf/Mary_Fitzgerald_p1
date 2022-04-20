@@ -54,8 +54,6 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             ResultSet rs = ps.executeQuery();
             rs.next();
 
-            //Employee employee =
-
             return new Employee(rs.getString("fname"),
                     rs.getString("lname"), rs.getInt("employee_id"));
 

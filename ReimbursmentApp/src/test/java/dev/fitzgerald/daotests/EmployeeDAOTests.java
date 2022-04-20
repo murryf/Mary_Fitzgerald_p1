@@ -23,14 +23,14 @@ public class EmployeeDAOTests {
     @Test
     @Order(2)
     void getEmployeeByID(){
-        Employee johnny = employeeDAO.getEmployeeById(1);
-        Assertions.assertEquals(johnny.getFName(), "Mike");
+        Employee johnny = employeeDAO.getEmployeeById(2);
+        Assertions.assertEquals(johnny.getFName(), "Monica");
     }
 
     @Test
     @Order(3)
     void updateEmployee(){
-        testEmployee.setFname("Monica");
+        testEmployee.setFname("Grace");
         employeeDAO.updateEmployee(testEmployee);
         Assertions.assertNotEquals(0, testEmployee.getEmployeeID());
     }
@@ -38,7 +38,7 @@ public class EmployeeDAOTests {
     @Test
     @Order(4)
     void deleteEmployee() {
-        Assertions.assertTrue(employeeDAO.deleteEmployeeById(18));
+        Assertions.assertTrue(employeeDAO.deleteEmployeeById(2));
 
     }
 }

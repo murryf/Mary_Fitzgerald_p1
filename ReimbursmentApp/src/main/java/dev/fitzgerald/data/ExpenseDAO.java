@@ -10,6 +10,9 @@ public interface ExpenseDAO {
     Expense createExpense(Expense expense);
     //Read
     Expense getExpenseById(int id);
+    List<Expense> getAllApprovedExpenses();
+    List<Expense> getAllDeniedExpenses();
+    List<Expense> getAllPendingExpenses();
     List<Expense> getAllExpenses();
     //update
     Expense updateExpense(Expense expense);

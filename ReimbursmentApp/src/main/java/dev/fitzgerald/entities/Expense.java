@@ -7,7 +7,7 @@ public class Expense {
     private int expenseID;
     private int employeeSource;
     private String description;
-    private double amount;
+    private float amount;
     private String status;
 
     /**
@@ -19,7 +19,7 @@ public class Expense {
      * @param description the description of the expense
      * @param amount the amount of the expense
      * */
-    public Expense(int employeeSource, String description, double amount){
+    public Expense(int employeeSource, String description, float amount){
         this.status = "Pending";
         this.employeeSource = employeeSource;
         this.description = description;
@@ -40,7 +40,7 @@ public class Expense {
      * @return the status of the method execution
      * */
     public boolean setDescription(String description) {
-        if(status == "Pending") {
+        if(status.compareTo("Pending") == 0) {
             this.description = description;
             return true;
         }
@@ -51,7 +51,7 @@ public class Expense {
      * Method to get the amount of the expense
      * @return the double value of the expense
      * */
-    public double getAmount() {
+    public float getAmount() {
         return this.amount;
     }
 
@@ -60,8 +60,8 @@ public class Expense {
      * @param amount the new ammount of the expense
      * @return the status of execution for the method
      * */
-    public boolean setAmount(double amount) {
-        if (this.status == "Pending") {
+    public boolean setAmount(float amount) {
+        if (status.compareTo("Pending") == 0) {
             this.amount = amount;
             return true;
         }
@@ -82,7 +82,7 @@ public class Expense {
      * @return the execution of the method as a boolean value.
      * */
     public boolean setStatus(String status) {
-        if(this.status == "Pending") {
+        if(status.compareTo("Pending") == 0) {
             this.status = status;
             return true;
         }
@@ -103,11 +103,27 @@ public class Expense {
      * @return the status of the execution of method as a boolean value
      * */
     public boolean setExpenseID(int expenseID) {
-        if(this.status == "Pending") {
+        if(status.compareTo("Pending") == 0) {
             this.expenseID = expenseID;
             return true;
         }
         return false;
+    }
+
+    /**
+     * Method to get an employee source id
+     * @return the source ID
+     * */
+    public int getEmployeeSource() {
+        return employeeSource;
+    }
+
+    /**
+     * Method to set the employee source
+     * @param employeeSource the new employee source
+     * */
+    public void setEmployeeSource(int employeeSource) {
+        this.employeeSource = employeeSource;
     }
 
     /**
