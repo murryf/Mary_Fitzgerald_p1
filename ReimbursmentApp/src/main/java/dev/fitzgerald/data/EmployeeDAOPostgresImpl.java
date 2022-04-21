@@ -49,18 +49,17 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             Connection conn = ConnectionUtil.createConnection();
             String sql = "select * from employees where employee_id = ?";
             assert conn != null;
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,id);
-            ps.execute();
-            if(ps.getGeneratedKeys() != null) {
-                ResultSet rs = ps.getGeneratedKeys();
-                rs.next();
+            ResultSet rs = ps.executeQuery();
 
-                return new Employee(rs.getString("fname"),
-                        rs.getString("lname"), rs.getInt("employee_id"));
-            } else {
-                return null;
-            }
+            //ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+
+            return new Employee(rs.getString("fname"),
+                    rs.getString("lname"), rs.getInt("employee_id"));
+
+
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
             return null;

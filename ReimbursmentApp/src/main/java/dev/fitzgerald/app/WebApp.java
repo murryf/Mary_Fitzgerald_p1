@@ -33,7 +33,7 @@ public class WebApp {
             services.createEmployee(employee);
             context.status(201);
             String employeeJSON = gson.toJson(employee);
-            context.result(employeeJSON);
+            context.result("Employee: "+employeeJSON+" Added");
         });
 
         /**
@@ -52,12 +52,14 @@ public class WebApp {
         //read one
         app.get("/employees/{id}", context ->{
             int id = Integer.parseInt(context.pathParam("id"));
-            if(services.getEmployeeById(id).getEmployeeID() == id){
+            Employee employee = services.getEmployeeById(id);
+            if(employee != null){
                 String employeeJSON = gson.toJson(services.getEmployeeById(id));
                 context.status(201);
                 context.result(employeeJSON);
             } else {
                 context.status(404);
+                context.result("No such employee");
             }
         });
 
@@ -114,12 +116,15 @@ public class WebApp {
 
         app.get("/expenses/{id}", context ->{
             int id = Integer.parseInt(context.pathParam("id"));
-            String expenseJSON = gson.toJson(expenseService.getExpenseById(id));
-            if(expenseJSON!=null) {
+            if(expenseService.getExpenseById(id) != null) {
+                String expenseJSON = gson.toJson(expenseService.getExpenseById(id));
                 context.result(expenseJSON);
-            } else {
+                context.status(201);
+            }else {
                 context.status(404);
+                context.result("No such expense");
             }
+
         });
 //
 //        /**

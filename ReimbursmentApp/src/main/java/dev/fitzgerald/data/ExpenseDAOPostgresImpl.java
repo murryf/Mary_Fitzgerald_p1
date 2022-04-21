@@ -53,7 +53,6 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             expense.setEmployeeSource(rs.getInt("employee_src"));
             expense.setDescription(rs.getString("description"));
             expense.setAmount(rs.getFloat("amount"));
-            System.out.println(expense.toString());
 
             return expense;
 
