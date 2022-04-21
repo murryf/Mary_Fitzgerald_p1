@@ -4,13 +4,18 @@ create table expenses(
 	expense_id serial primary key,
 	employee_src int,
 	description varchar(500),
-	ammount int check (ammount > 0),
+	amount float check (amount > 0),
 	approval varchar(10),
 	foreign key (employee_src) references employees(employee_id)
 );
 
 create table employees(
 	employee_id serial primary key,
-	f_name varchar(20),
-	l_name varchar(30)
+	fname varchar(20),
+	lname varchar(30)
 );
+drop table employees;
+drop table expenses ;
+
+select*from employees;
+select * from expenses;
