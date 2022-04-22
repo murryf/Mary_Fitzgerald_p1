@@ -2,6 +2,8 @@ package dev.fitzgerald.service;
 
 import dev.fitzgerald.data.EmployeeDAO;
 import dev.fitzgerald.data.EmployeeDAOPostgresImpl;
+import dev.fitzgerald.data.ExpenseDAO;
+import dev.fitzgerald.data.ExpenseDAOPostgresImpl;
 import dev.fitzgerald.entities.Employee;
 import dev.fitzgerald.entities.Expense;
 
@@ -10,6 +12,7 @@ import java.util.List;
 public class ReimbursementServiceImpl implements ReimbursementService{
 
     private EmployeeDAO employeeDAO;
+    private ExpenseDAO expenseDAO =  new ExpenseDAOPostgresImpl();
 
 
     /**
@@ -71,8 +74,15 @@ public class ReimbursementServiceImpl implements ReimbursementService{
      * */
     @Override
     public boolean deleteEmployeeByID(int id) {
+
+        //Should filter out any employees that had associated expenses
+        List<Expense> allExpenses = expenseDAO.getAllExpenses();
+        for(Expense expense : allExpenses){
+            if(expense.getEmployeeSource() == id){
+                return false;
+            }
+        }
         return this.employeeDAO.deleteEmployeeById(id);
     }
-
 
 }

@@ -12,9 +12,9 @@ public interface ReimbursementService {
 
     //read
     Employee getEmployeeById(int id);
-    public List<Employee> getAllEmployees();
+    List<Employee> getAllEmployees();
 
-        //update
+    //update
     Employee updateEmployee(Employee employee);
 
     //delete

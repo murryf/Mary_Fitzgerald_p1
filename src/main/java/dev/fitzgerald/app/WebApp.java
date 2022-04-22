@@ -95,9 +95,14 @@ public class WebApp {
             int id = Integer.parseInt(context.pathParam("id"));
             Employee emp = services.getEmployeeById(id); //make sure it is in the table
             if(emp != null){
-                services.deleteEmployeeByID(id);
-                context.result("Employee " + id + " deleted");
-                context.status(201);
+
+                if(services.deleteEmployeeByID(id)) {
+                    context.result("Employee " + id + " deleted");
+                    context.status(201);
+                } else {
+                    context.result("Employee not deleted.");
+                    context.status(409);
+                }
             } else {
                 context.result("Employee not found");
                 context.status(404);
@@ -183,6 +188,7 @@ public class WebApp {
             }
 
         });
+
         /**
          * Approve or Deny a given expense
          * */
@@ -206,8 +212,6 @@ public class WebApp {
 
         });
 
-
-
         /**
          * Delete an expense item. Must be in pending status
          * */
@@ -226,13 +230,26 @@ public class WebApp {
 
 
 ////__________________________Nested_Routes________________________________________________
-//
-//        /**
-//         * Read an employee's expense
-//         * */
-//        //read one expenses
-//        app.get("/employees/{id}/expenses", null);
-//
+
+        /**
+         * Read an employee's expense
+         * */
+        //read one expenses
+        app.get("/employees/{id}/expenses", context -> {
+            int id = Integer.parseInt(context.pathParam("id"));
+            List<Expense> expenses = expenseService.getAllExpenses();
+            List<Expense> filteredExpenses = new ArrayList<>();
+            for(Expense expense : expenses){
+                if(expense.getEmployeeSource() == id){
+                    filteredExpenses.add(expense);
+                }
+            }
+            String filteredJSON = gson.toJson(filteredExpenses);
+            context.result(filteredJSON);
+            context.status(201);
+
+        });
+
 //        /**
 //         * Post an expense to an employee
 //         * */
