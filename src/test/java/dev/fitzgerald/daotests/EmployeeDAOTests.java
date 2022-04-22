@@ -4,6 +4,8 @@ import dev.fitzgerald.data.EmployeeDAOPostgresImpl;
 import dev.fitzgerald.entities.Employee;
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)// to run tests in order
 
 public class EmployeeDAOTests {
@@ -35,10 +37,20 @@ public class EmployeeDAOTests {
         Assertions.assertNotEquals(0, testEmployee.getEmployeeID());
     }
 
-//    @Test
-//    @Order(4)
-//    void deleteEmployee() {
-//        Assertions.assertTrue(employeeDAO.deleteEmployeeById(2));
-//
-//    }
+    @Test
+    @Order(4)
+    void get_all_employees(){
+        List<Employee> employees;
+        employees = employeeDAO.getAllEmployees();
+        Assertions.assertNotNull(employees);
+
+    }
+
+
+    @Test
+    @Order(5)
+    void deleteEmployee() {
+        Assertions.assertTrue(employeeDAO.deleteEmployeeById(2));
+
+    }
 }

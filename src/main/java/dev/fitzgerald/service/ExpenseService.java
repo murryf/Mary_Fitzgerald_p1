@@ -12,7 +12,7 @@ public interface ExpenseService {
     Expense getExpenseById(int id);
     List<Expense> getAllExpenses();
     //update
-    Expense updateExpense(Expense expense);
+    boolean updateExpense(Expense expense, int id);
     //delete
     boolean deleteExpense(int id);
 }

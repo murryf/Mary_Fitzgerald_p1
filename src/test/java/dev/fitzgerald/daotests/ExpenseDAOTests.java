@@ -5,6 +5,9 @@ import dev.fitzgerald.data.ExpenseDAOPostgresImpl;
 import dev.fitzgerald.entities.Expense;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)// to run tests in order
 
 public class ExpenseDAOTests {
@@ -23,9 +26,47 @@ public class ExpenseDAOTests {
     @Test
     @Order(2)
     void retrieve_expense_by_id(){
-        Expense testExpense2 = expenseDAO.getExpenseById(1);
+        Expense testExpense2 = expenseDAO.getExpenseById(6);
         Assertions.assertNotNull(testExpense2);
 
     }
 
+    @Test
+    @Order(3)
+    void get_all_expenses(){
+        List<Expense> expenses;
+        expenses = expenseDAO.getAllExpenses();
+        Assertions.assertNotNull(expenses);
+    }
+
+//    @Test
+//    @Order(4)
+//    void get_all_pending_expenses(){
+//        List<Expense> expenses;
+//        expenses = expenseDAO.getAllPendingExpenses();
+//        Assertions.assertNotNull(expenses);
+//    }
+
+    @Test
+    @Order(5)
+    void updateEmployee() {
+        testExpense.setDescription("Hotel Overnight");
+        expenseDAO.updateExpense(testExpense, 1);
+        Assertions.assertNotEquals(0, testExpense.getExpenseID());
+    }
+
+    @Test
+    @Order(6)
+    void update_employee_pending(){
+        Expense expense = new Expense(6,"The Hilton 2 nights", 500);
+        expense.setExpenseID(6);
+        Assertions.assertTrue(expenseDAO.updateExpense(expense, 2));
+    }
+    @Test
+    @Order(7)
+    void update_employee_pending_bad(){
+        Expense expense = new Expense(6,"The Hilton 2 nights", 500);
+        expense.setExpenseID(6);
+        Assertions.assertFalse(expenseDAO.updateExpense(expense, 5));
+    }
 }

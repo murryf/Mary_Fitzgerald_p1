@@ -31,15 +31,7 @@ public class ReimbursementServiceImpl implements ReimbursementService{
         return employee1;
     }
 
-    /**
-     * Handler to create an associated expense for the employee object
-     * @param expense an expense to be saved to the employee
-     * @return the saved expense
-     * */
-    @Override
-    public Expense createExpense(Expense expense) {
-        return null;
-    }
+
 
     /**
      * Handler to get an employee by their id number
@@ -51,15 +43,6 @@ public class ReimbursementServiceImpl implements ReimbursementService{
         return this.employeeDAO.getEmployeeById(id);
     }
 
-    /**
-     * Handler to get an expense associated with an employee by id number
-     * @param id the expense ID to be searched
-     * @return the related expense
-     * */
-    @Override
-    public Expense getExpenseByID(int id) {
-        return null;
-    }
 
     /**
      * Handler to get all employees
@@ -79,15 +62,7 @@ public class ReimbursementServiceImpl implements ReimbursementService{
         return this.employeeDAO.updateEmployee(employee);
     }
 
-    /**
-     * Handler to update a related expense
-     * @param expense the unsaved expense
-     * @return the saved expense
-     * */
-    @Override
-    public Expense updateExpense(Expense expense) {
-        return null;
-    }
+
 
     /**
      * Handler to delete an employee by ID
@@ -99,13 +74,5 @@ public class ReimbursementServiceImpl implements ReimbursementService{
         return this.employeeDAO.deleteEmployeeById(id);
     }
 
-    /**
-     * Handler to delete an expense by ID
-     * @param id the id of the expense
-     * @return the status of the deletion
-     * */
-    @Override
-    public boolean deleteExpense(int id) {
-        return false;
-    }
+
 }

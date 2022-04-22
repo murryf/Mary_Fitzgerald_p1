@@ -1,14 +1,22 @@
 package dev.fitzgerald.data;
 
+import dev.fitzgerald.entities.Employee;
 import dev.fitzgerald.entities.Expense;
 import dev.fitzgerald.utilities.ConnectionUtil;
 import org.postgresql.util.PSQLException;
 
 import java.security.Provider;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseDAOPostgresImpl implements ExpenseDAO {
+
+    /**
+     * Method to create a new expense in the database
+     * @param expense the expense to be saved
+     * @return the expense now updated
+     * */
     @Override
     public Expense createExpense(Expense expense) {
 
@@ -20,7 +28,7 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, expense.getEmployeeSource());
             ps.setString(2, expense.getDescription());
-            ps.setFloat(3,expense.getAmount());
+            ps.setDouble(3,expense.getAmount());
             ps.setString(4, expense.getStatus());
             ps.execute();
 
@@ -35,6 +43,12 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
         }
     }
 
+
+    /**
+     * Method to fetch an expense by id
+     * @param id the id being looked up
+     * @return the corresponding expense
+     * */
     @Override
     public Expense getExpenseById(int id) {
 
@@ -62,33 +76,81 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
         }
     }
 
-    @Override
-    public List<Expense> getAllApprovedExpenses() {
-        return null;
-    }
 
-    @Override
-    public List<Expense> getAllDeniedExpenses() {
-        return null;
-    }
-
-    @Override
-    public List<Expense> getAllPendingExpenses() {
-        return null;
-    }
-
+    /**
+     * Method to get all expenses
+     * @return the list of all expenses
+     * */
     @Override
     public List<Expense> getAllExpenses() {
-        return null;
+        try {
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "select * from expenses";
+            assert conn != null;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            List<Expense> expense = new ArrayList<Expense>();
+            while(rs.next()){
+                Expense exp = new Expense(0,"", 0);
+                exp.setExpenseID(rs.getInt("expense_id"));
+                exp.setEmployeeSource(rs.getInt("employee_src"));
+                exp.setDescription(rs.getString("description"));
+                exp.setAmount(rs.getFloat("amount"));
+                exp.setStatus(rs.getString("approval"));
+                expense.add(exp);
+            }
+            return expense;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
     }
 
+
+    /**
+     * Method to update an expense object if status is "Pending"
+     * */
     @Override
-    public Expense updateExpense(Expense expense) {
-        return null;
+    public boolean updateExpense(Expense expense, int id) {
+        try{
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "update expenses set description = ?, amount = ? where approval = 'Pending' and expense_id = ?";
+            assert conn != null;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, expense.getDescription());
+            ps.setDouble(2,expense.getAmount());
+            ps.setInt(3, id);
+            ps.execute();
+            return true; // returns true if the prepared statement executes correctly
+
+        } catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
 
     @Override
     public boolean deleteExpense(int id) {
-        return false;
+        try {
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "delete from expenses where expense_id = ?";
+            assert conn != null;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            if(getExpenseById(id) != null) {
+                ps.execute();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

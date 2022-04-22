@@ -7,7 +7,7 @@ public class Expense {
     private int expenseID;
     private int employeeSource;
     private String description;
-    private float amount;
+    private double amount;
     private String status;
 
     /**
@@ -19,7 +19,7 @@ public class Expense {
      * @param description the description of the expense
      * @param amount the amount of the expense
      * */
-    public Expense(int employeeSource, String description, float amount){
+    public Expense(int employeeSource, String description, double amount){
         this.status = "Pending";
         this.employeeSource = employeeSource;
         this.description = description;
@@ -51,7 +51,7 @@ public class Expense {
      * Method to get the amount of the expense
      * @return the double value of the expense
      * */
-    public float getAmount() {
+    public double getAmount() {
         return this.amount;
     }
 
@@ -82,7 +82,7 @@ public class Expense {
      * @return the execution of the method as a boolean value.
      * */
     public boolean setStatus(String status) {
-        if(status.compareTo("Pending") == 0) {
+        if(this.status.compareTo("Pending") == 0 || this.status.compareTo(null) == 0) {
             this.status = status;
             return true;
         }

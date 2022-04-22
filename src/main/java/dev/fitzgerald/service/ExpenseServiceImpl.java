@@ -52,8 +52,8 @@ public class ExpenseServiceImpl implements ExpenseService {
      * @return the now updated expense after being handled
      * */
     @Override
-    public Expense updateExpense(Expense expense) {
-        return this.expense.updateExpense(expense);
+    public boolean updateExpense(Expense expense, int id) {
+        return this.expense.updateExpense(expense, id);
     }
 
     /**
