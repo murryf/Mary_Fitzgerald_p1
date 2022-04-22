@@ -61,12 +61,13 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             ResultSet rs = ps.executeQuery();
             rs.next();
 
-            Expense expense = new Expense(); //default set to pending do not need to assign approval
+            Expense expense = new Expense();
 
             expense.setExpenseID(rs.getInt("expense_id"));
             expense.setEmployeeSource(rs.getInt("employee_src"));
             expense.setDescription(rs.getString("description"));
             expense.setAmount(rs.getFloat("amount"));
+            expense.setStatus(rs.getString("approval"));
 
             return expense;
 
@@ -113,6 +114,9 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
 
     /**
      * Method to update an expense object if status is "Pending"
+     * @param expense the unsaved expense data
+     * @param id the id of the expense being updated
+     * @return the representation of success or failure;
      * */
     @Override
     public boolean updateExpense(Expense expense, int id) {
@@ -133,12 +137,39 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
         }
     }
 
+    /**
+     * Method to update the expense status to either Approved or Denied
+     * @param id the id of the expense to be updated
+     * @param status the new status
+     * @return the boolean representation of success or failure
+     * */
+    @Override
+    public boolean updateExpenseStatus(int id, String status) {
 
+        try {
+            Connection conn = ConnectionUtil.createConnection();
+            String sql = "update expenses set approval = ? where expense_id = ?";
+            assert conn != null;
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,status);
+            ps.setInt(2,id);
+            ps.execute();
+            return true;
+
+        } catch(SQLException | NullPointerException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Method to delete an expense item only if it is pending
+     * */
     @Override
     public boolean deleteExpense(int id) {
         try {
             Connection conn = ConnectionUtil.createConnection();
-            String sql = "delete from expenses where expense_id = ?";
+            String sql = "delete from expenses where expense_id = ? and approval = 'Pending'";
             assert conn != null;
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);

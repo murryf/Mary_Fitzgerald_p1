@@ -48,12 +48,28 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     /**
      * Delegate the updating of an expense
-     * @param expense the expense being handled
+     * @param expense the expense information to update
+     * @param id the id of the expense to be updated
      * @return the now updated expense after being handled
      * */
     @Override
     public boolean updateExpense(Expense expense, int id) {
         return this.expense.updateExpense(expense, id);
+    }
+
+    /**
+     * Method to update the expense status
+     * @param id the id to the expense being updated
+     * @param status the new and final status
+     * @return a success or failure of the execution
+     * */
+    @Override
+    public boolean updateExpenseStatus(int id, String status) {
+        if(expense.getExpenseById(id).getStatus().compareTo("Pending") == 0) {
+            return this.expense.updateExpenseStatus(id, status);
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -182,16 +182,30 @@ public class WebApp {
                 context.status(404);
             }
 
-        });//
-//        /**
-//         * Approve a given expense
-//         * */
-//        app.patch("/expenses/20/approve", null);
-//
-//        /**
-//         * Deny a given expense
-//         * */
-//        app.patch("/expense/20/deny", null);
+        });
+        /**
+         * Approve or Deny a given expense
+         * */
+        app.patch("/expenses/{id}/{status}", context -> {
+            int id = Integer.parseInt(context.pathParam("id"));
+            String status = context.pathParam("status");
+            if(status.compareTo("Approved") == 0 || status.compareTo("Denied") == 0){
+                if(expenseService.getExpenseById(id).getStatus().compareTo("Pending") == 0) {
+                    expenseService.updateExpenseStatus(id, status);
+                    context.status(201);
+                    context.result("Updated");
+                } else {
+                    context.status(409);
+                    context.result("Cannot modify Approved/Denied expenses");
+                }
+            } else {
+                context.status(409);
+                context.result("Invalid input");
+            }
+
+
+        });
+
 
 
         /**

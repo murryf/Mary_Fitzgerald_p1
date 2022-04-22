@@ -13,6 +13,7 @@ public interface ExpenseService {
     List<Expense> getAllExpenses();
     //update
     boolean updateExpense(Expense expense, int id);
+    boolean updateExpenseStatus(int id, String status);
     //delete
     boolean deleteExpense(int id);
 }
