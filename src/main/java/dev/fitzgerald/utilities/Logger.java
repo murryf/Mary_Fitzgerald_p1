@@ -20,7 +20,7 @@ public class Logger {
         String logMessage = level.name() +" " +  message + " " + new Date() + "\n";
 
         try {   //Try to add to the applogs
-            Files.write(Paths.get("C:\\Users\\Owner\\Downloads\\Mary_Fitzgerald_p1-main\\Mary_Fitzgerald_p1-main\\ReimbursmentApp\\applogs.log"),
+            Files.write(Paths.get("F:\\Work\\Mary_Fitzgerald_p1-main\\applogs.log"),
                     logMessage.getBytes(StandardCharsets.UTF_8),
                     StandardOpenOption.APPEND);
         } catch (IOException e) {

@@ -80,7 +80,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            List<Employee> employees = new ArrayList<Employee>();
+            List<Employee> employees = new ArrayList<>();
             while(rs.next()){
                 Employee emp = new Employee("","", 0);
                 emp.setID(rs.getInt("employee_id"));
@@ -100,7 +100,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
     /**
      * Method to update an employee first or last name.
      * @param employee the unsaved employee to be stored in the database
-     * @returns the same employee if the database update worked, null if it did not
+     * @return the same employee if the database update worked, null if it did not
      * */
     public Employee updateEmployee(Employee employee) {
             try{

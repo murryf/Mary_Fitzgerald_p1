@@ -1,11 +1,8 @@
 package dev.fitzgerald.data;
 
-import dev.fitzgerald.entities.Employee;
 import dev.fitzgerald.entities.Expense;
 import dev.fitzgerald.utilities.ConnectionUtil;
-import org.postgresql.util.PSQLException;
 
-import java.security.Provider;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

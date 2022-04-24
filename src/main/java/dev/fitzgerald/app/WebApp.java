@@ -1,7 +1,6 @@
 package dev.fitzgerald.app;
 
 import com.google.gson.Gson;
-import dev.fitzgerald.data.EmployeeDAO;
 import dev.fitzgerald.data.EmployeeDAOPostgresImpl;
 import dev.fitzgerald.data.ExpenseDAOPostgresImpl;
 import dev.fitzgerald.entities.Employee;
@@ -23,7 +22,7 @@ public class WebApp {
         Javalin app = Javalin.create();
 
  //_______________Employee_Section_________________________________________
-        /**
+        /*
          * Post a new employee through the app
          * */
         //Create
@@ -37,7 +36,7 @@ public class WebApp {
             context.result("Employee: "+employeeJSON+" Added");
         });
 
-        /**
+        /*
          * Get all employees
          * */
         //Read all
@@ -47,7 +46,7 @@ public class WebApp {
             context.result(emplJSON);
         });
 
-        /**
+        /*
          * get one employee
          * */
         //read one
@@ -64,7 +63,7 @@ public class WebApp {
             }
         });
 
-        /**
+        /*
          * Update an employee object
          * */
         //Update employee
@@ -87,7 +86,7 @@ public class WebApp {
 
         });
 
-        /**
+        /*
         * Delete an employee object
          * */
         //Delete employee
@@ -112,7 +111,7 @@ public class WebApp {
 
 //  _______________________Expense_Section______________________________________
 
-        /**
+        /*
          * Post an expense
          * */
         //post an expense
@@ -125,7 +124,7 @@ public class WebApp {
             context.result(expenseJSON);
         });
 
-        /**
+        /*
          * get an expense by id number
          * */
         app.get("/expenses/{id}", context ->{
@@ -141,7 +140,7 @@ public class WebApp {
 
         });
 
-        /**
+        /*
          * get all expenses expenses. contains filters
          * */
         app.get("/expenses", context -> {
@@ -162,7 +161,7 @@ public class WebApp {
             }
         });
 
-        /**
+        /*
          * Update an expense when in pending status
          * */
         app.put("/expenses/{id}", context -> {
@@ -189,7 +188,7 @@ public class WebApp {
 
         });
 
-        /**
+        /*
          * Approve or Deny a given expense
          * */
         app.patch("/expenses/{id}/{status}", context -> {
@@ -212,7 +211,7 @@ public class WebApp {
 
         });
 
-        /**
+        /*
          * Delete an expense item. Must be in pending status
          * */
         app.delete("/expenses/{id}",context -> {
@@ -231,7 +230,7 @@ public class WebApp {
 
 ////__________________________Nested_Routes________________________________________________
 
-        /**
+        /*
          * Read an employee's expense
          * */
         //read one expenses
@@ -251,7 +250,7 @@ public class WebApp {
         });
 
 
-        /**
+        /*
          * Post an expense to an employee
          * */
         //Post an expense to a specific employee

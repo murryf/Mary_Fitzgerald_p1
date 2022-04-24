@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ExpenseServiceImpl implements ExpenseService {
 
-    private ExpenseDAOPostgresImpl expense;
+    private final ExpenseDAOPostgresImpl expense;
 
     /**
      * Constructor for handler for an expense entity

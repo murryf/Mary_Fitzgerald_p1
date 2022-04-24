@@ -39,16 +39,11 @@ public class ExpenseDAOTests {
         Assertions.assertNotNull(expenses);
     }
 
-//    @Test
-//    @Order(4)
-//    void get_all_pending_expenses(){
-//        List<Expense> expenses;
-//        expenses = expenseDAO.getAllPendingExpenses();
-//        Assertions.assertNotNull(expenses);
-//    }
+
+
 
     @Test
-    @Order(5)
+    @Order(4)
     void updateEmployee() {
         testExpense.setDescription("Hotel Overnight");
         expenseDAO.updateExpense(testExpense, 1);
@@ -56,14 +51,14 @@ public class ExpenseDAOTests {
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     void update_employee_pending(){
         Expense expense = new Expense(6,"The Hilton 2 nights", 500);
         expense.setExpenseID(6);
         Assertions.assertTrue(expenseDAO.updateExpense(expense, 2));
     }
     @Test
-    @Order(7)
+    @Order(6)
     void update_employee_pending_bad(){
         Expense expense = new Expense(6,"The Hilton 2 nights", 500);
         expense.setExpenseID(6);

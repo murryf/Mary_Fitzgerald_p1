@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ReimbursementServiceImpl implements ReimbursementService{
 
-    private EmployeeDAO employeeDAO;
-    private ExpenseDAO expenseDAO =  new ExpenseDAOPostgresImpl();
+    private final EmployeeDAO employeeDAO;
+    private final ExpenseDAO expenseDAO =  new ExpenseDAOPostgresImpl();
 
 
     /**
@@ -29,10 +29,7 @@ public class ReimbursementServiceImpl implements ReimbursementService{
      * @return the saved employee entity
      * */
     @Override
-    public Employee createEmployee(Employee employee) {
-        Employee employee1 = this.employeeDAO.createEmployee(employee);
-        return employee1;
-    }
+    public Employee createEmployee(Employee employee) {return this.employeeDAO.createEmployee(employee);}
 
 
 

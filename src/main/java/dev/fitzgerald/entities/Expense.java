@@ -36,15 +36,11 @@ public class Expense {
     /**
      * Method to set the description of an expense if the status is pending
      * does nothing if not in the correct status
-     * @param description saved as the new description of an expense object
-     * @return the status of the method execution
-     * */
-    public boolean setDescription(String description) {
+     * @param description saved as the new description of an expense object */
+    public void setDescription(String description) {
         if(status.compareTo("Pending") == 0) {
             this.description = description;
-            return true;
         }
-        return false;
     }
 
     /**
@@ -57,15 +53,11 @@ public class Expense {
 
     /**
      * Method to set the amount of the expense if the expense is in pending state
-     * @param amount the new ammount of the expense
-     * @return the status of execution for the method
-     * */
-    public boolean setAmount(float amount) {
+     * @param amount the new ammount of the expense */
+    public void setAmount(float amount) {
         if (status.compareTo("Pending") == 0) {
             this.amount = amount;
-            return true;
         }
-        return false;
     }
 
     /**
@@ -78,15 +70,11 @@ public class Expense {
 
     /**
      * Method to set the status of an expense. May only be used once per expense
-     * @param status the new status to be assigned
-     * @return the execution of the method as a boolean value.
-     * */
-    public boolean setStatus(String status) {
+     * @param status the new status to be assigned */
+    public void setStatus(String status) {
         if(this.status.compareTo("Pending") == 0 || this.status.compareTo(null) == 0) {
             this.status = status;
-            return true;
         }
-        return false;
     }
 
     /**
@@ -99,15 +87,11 @@ public class Expense {
 
     /**
      * Method to set the expense ID of an expense object
-     * @param expenseID the new expense ID
-     * @return the status of the execution of method as a boolean value
-     * */
-    public boolean setExpenseID(int expenseID) {
+     * @param expenseID the new expense ID */
+    public void setExpenseID(int expenseID) {
         if(status.compareTo("Pending") == 0) {
             this.expenseID = expenseID;
-            return true;
         }
-        return false;
     }
 
     /**
