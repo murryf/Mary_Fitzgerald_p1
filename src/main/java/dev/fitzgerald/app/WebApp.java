@@ -119,7 +119,7 @@ public class WebApp {
         app.post("/expenses", context -> {
             String body = context.body();
             Expense expense = gson.fromJson(body, Expense.class);
-            Expense saved = expenseService.createExpense(expense);
+            expenseService.createExpense(expense);
             context.status(201);
             String expenseJSON = gson.toJson(expense);
             context.result(expenseJSON);
@@ -250,12 +250,21 @@ public class WebApp {
 
         });
 
-//        /**
-//         * Post an expense to an employee
-//         * */
-//        //Post an expense to a specific employee
-//        app.post("/employees/{id}/expenses", null);
-//
+
+        /**
+         * Post an expense to an employee
+         * */
+        //Post an expense to a specific employee
+        app.post("/employees/{id}/expenses", context -> {
+            int id = Integer.parseInt(context.pathParam("id"));
+            String body = context.body();
+            Expense expense = gson.fromJson(body, Expense.class);
+            expense.setEmployeeSource(id);
+            expenseService.createExpense(expense);
+            context.status(201);
+            context.result("Added expense: " + gson.toJson(expense) + " to employee " + id);
+
+        });
 
 //  _______________________________________________________________________________
         app.start(5000);
