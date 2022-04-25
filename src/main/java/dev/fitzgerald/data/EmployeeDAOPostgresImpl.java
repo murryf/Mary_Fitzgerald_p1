@@ -33,8 +33,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             return employee;
 
         }catch (SQLException e) {
-            Logger.log(e.getMessage(), LoggerList.ERROR);
-            //e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);;
             return null;
         }
 
@@ -64,7 +63,6 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
 
 
         } catch (SQLException | NullPointerException e) {
-            //e.printStackTrace();
             Logger.log(e.getMessage(),LoggerList.ERROR);
             return null;
         }
@@ -95,7 +93,6 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             return employees;
 
         } catch (SQLException e) {
-            //e.printStackTrace();
             Logger.log(e.getMessage(),LoggerList.ERROR);
             return null;
         }
@@ -120,7 +117,6 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
                 return employee;
 
             } catch (SQLException | NullPointerException e) {
-                //e.printStackTrace();
                 Logger.log(e.getMessage(), LoggerList.ERROR);
                 return null;
             }
@@ -149,7 +145,6 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             }
         } catch (SQLException e){
             Logger.log(e.getMessage(),LoggerList.ERROR);
-            //e.printStackTrace();
             return false;
         }
     }

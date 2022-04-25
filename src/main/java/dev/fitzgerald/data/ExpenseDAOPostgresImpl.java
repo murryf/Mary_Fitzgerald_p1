@@ -38,7 +38,6 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return expense;
         } catch (SQLException | NullPointerException e) {
             Logger.log(e.getMessage(), LoggerList.ERROR);
-            //e.printStackTrace();
             return null;
         }
     }
@@ -104,7 +103,6 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return expense;
 
         } catch (SQLException e) {
-            //e.printStackTrace();
             Logger.log(e.getMessage(), LoggerList.ERROR);
             return null;
         }
@@ -158,7 +156,6 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return true;
 
         } catch(SQLException | NullPointerException e) {
-            //e.printStackTrace();
             Logger.log(e.getMessage(), LoggerList.ERROR);
             return false;
         }
@@ -182,7 +179,6 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
                 return false;
             }
         } catch (SQLException e){
-            //e.printStackTrace();
             Logger.log(e.getMessage(), LoggerList.ERROR);
             return false;
         }
