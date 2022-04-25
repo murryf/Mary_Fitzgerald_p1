@@ -55,7 +55,6 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            //ResultSet rs = ps.getGeneratedKeys();
             rs.next();
 
             return new Employee(rs.getString("fname"),
@@ -148,5 +147,4 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             return false;
         }
     }
-
 }

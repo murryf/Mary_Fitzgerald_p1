@@ -12,7 +12,7 @@ public class ConnectionUtil {
 
         } catch (SQLException e) {
             Logger.log(e.getMessage(), LoggerList.ERROR);
-            //e.printStackTrace();
+
             return null;
         }
 
