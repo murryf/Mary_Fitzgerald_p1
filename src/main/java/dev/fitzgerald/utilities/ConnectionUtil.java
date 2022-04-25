@@ -5,7 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionUtil {
+
+    private ConnectionUtil(){}//cannot instantiate the connection utility
+
     public static Connection createConnection(){
+
+
 
         try {
             return  DriverManager.getConnection(System.getenv("REIMAPP"));
