@@ -26,7 +26,7 @@ class EmployeeDAOTests {
     @Order(2)
     void getEmployeeByID(){
         Employee johnny = employeeDAO.getEmployeeById(1);
-        Assertions.assertEquals(johnny.getFName(), "Mike");
+        Assertions.assertEquals( "Mike", johnny.getFName());
     }
 
     @Test
