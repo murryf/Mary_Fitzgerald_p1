@@ -9,7 +9,7 @@ import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)// to run tests in order
 
-public class ExpenseDAOTests {
+class ExpenseDAOTests {
 
     static ExpenseDAOPostgresImpl expenseDAO = new ExpenseDAOPostgresImpl();
     static Expense testExpense = null;
