@@ -15,8 +15,8 @@ import java.util.List;
 
 public class WebApp {
     public static final Gson gson  = new Gson();
-    public static ReimbursementServiceImpl services = new ReimbursementServiceImpl(new EmployeeDAOPostgresImpl());
-    public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgresImpl());
+    public static final ReimbursementServiceImpl services = new ReimbursementServiceImpl(new EmployeeDAOPostgresImpl());
+    public static final ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgresImpl());
 
     public static void main(String[] args){
         Javalin app = Javalin.create();
