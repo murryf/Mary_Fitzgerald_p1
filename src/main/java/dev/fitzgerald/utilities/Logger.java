@@ -9,6 +9,7 @@ import java.util.Date;
 public class Logger {
 
 
+    private Logger(){}  //Take away the ability to create an instance of Logger
     /**
      * Method to log an adverse event in the app
      * @param message the information about the event
