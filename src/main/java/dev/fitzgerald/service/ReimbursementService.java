@@ -1,7 +1,6 @@
 package dev.fitzgerald.service;
 
 import dev.fitzgerald.entities.Employee;
-import dev.fitzgerald.entities.Expense;
 
 import java.util.List;
 
