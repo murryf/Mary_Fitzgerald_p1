@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebApp {
-    public static Gson gson  = new Gson();
+    public static final Gson gson  = new Gson();
     public static ReimbursementServiceImpl services = new ReimbursementServiceImpl(new EmployeeDAOPostgresImpl());
     public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgresImpl());
 
