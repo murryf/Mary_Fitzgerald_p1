@@ -2,6 +2,8 @@ package dev.fitzgerald.service;
 
 import dev.fitzgerald.data.ExpenseDAOPostgresImpl;
 import dev.fitzgerald.entities.Expense;
+import dev.fitzgerald.utilities.Logger;
+import dev.fitzgerald.utilities.LoggerList;
 
 import java.util.List;
 
@@ -22,10 +24,14 @@ public class ExpenseServiceImpl implements ExpenseService {
      * @param expense the expense being saved
      * @return the saved expense
      **/
-
     @Override
     public Expense createExpense(Expense expense) {
-        return this.expense.createExpense(expense);
+        if(expense.getAmount() < 0){
+            Logger.log("Negative value detected", LoggerList.WARNING);
+            return null;
+        } else {
+            return this.expense.createExpense(expense);
+        }
     }
 
     /**

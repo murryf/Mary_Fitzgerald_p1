@@ -2,6 +2,8 @@ package dev.fitzgerald.data;
 
 import dev.fitzgerald.entities.Employee;
 import dev.fitzgerald.utilities.ConnectionUtil;
+import dev.fitzgerald.utilities.Logger;
+import dev.fitzgerald.utilities.LoggerList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,7 +33,8 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             return employee;
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
+            //e.printStackTrace();
             return null;
         }
 
@@ -61,7 +64,8 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
 
 
         } catch (SQLException | NullPointerException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.log(e.getMessage(),LoggerList.ERROR);
             return null;
         }
     }
@@ -91,7 +95,8 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             return employees;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.log(e.getMessage(),LoggerList.ERROR);
             return null;
         }
     }
@@ -115,7 +120,8 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
                 return employee;
 
             } catch (SQLException | NullPointerException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                Logger.log(e.getMessage(), LoggerList.ERROR);
                 return null;
             }
 
@@ -142,7 +148,8 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
                 return false;
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            Logger.log(e.getMessage(),LoggerList.ERROR);
+            //e.printStackTrace();
             return false;
         }
     }

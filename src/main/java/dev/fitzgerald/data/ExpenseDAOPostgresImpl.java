@@ -2,6 +2,8 @@ package dev.fitzgerald.data;
 
 import dev.fitzgerald.entities.Expense;
 import dev.fitzgerald.utilities.ConnectionUtil;
+import dev.fitzgerald.utilities.Logger;
+import dev.fitzgerald.utilities.LoggerList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,7 +37,8 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             expense.setExpenseID(rs.getInt("expense_id"));
             return expense;
         } catch (SQLException | NullPointerException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
+            //e.printStackTrace();
             return null;
         }
     }
@@ -69,7 +72,7 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return expense;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
             return null;
         }
     }
@@ -101,7 +104,8 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return expense;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
             return null;
         }
 
@@ -129,7 +133,7 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return true; // returns true if the prepared statement executes correctly
 
         } catch (SQLException | NullPointerException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
             return false;
         }
     }
@@ -154,7 +158,8 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             return true;
 
         } catch(SQLException | NullPointerException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
             return false;
         }
     }
@@ -177,7 +182,8 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
                 return false;
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
             return false;
         }
     }

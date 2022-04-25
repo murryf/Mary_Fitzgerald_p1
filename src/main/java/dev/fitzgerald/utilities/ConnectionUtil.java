@@ -11,7 +11,8 @@ public class ConnectionUtil {
             return  DriverManager.getConnection(System.getenv("REIMAPP"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.log(e.getMessage(), LoggerList.ERROR);
+            //e.printStackTrace();
             return null;
         }
 
