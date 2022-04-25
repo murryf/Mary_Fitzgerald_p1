@@ -33,7 +33,7 @@ public class EmployeeDAOPostgresImpl implements EmployeeDAO{
             return employee;
 
         }catch (SQLException e) {
-            Logger.log(e.getMessage(), LoggerList.ERROR);;
+            Logger.log(e.getMessage(), LoggerList.ERROR);
             return null;
         }
 

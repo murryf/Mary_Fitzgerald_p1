@@ -10,8 +10,6 @@ public class ConnectionUtil {
 
     public static Connection createConnection(){
 
-
-
         try {
             return  DriverManager.getConnection(System.getenv("REIMAPP"));
 
@@ -20,6 +18,5 @@ public class ConnectionUtil {
 
             return null;
         }
-
     }
 }
