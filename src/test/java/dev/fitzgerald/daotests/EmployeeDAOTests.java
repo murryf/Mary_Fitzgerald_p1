@@ -8,7 +8,7 @@ import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)// to run tests in order
 
-public class EmployeeDAOTests {
+class EmployeeDAOTests {
 
     static EmployeeDAOPostgresImpl employeeDAO = new EmployeeDAOPostgresImpl();
     static Employee testEmployee = null;
