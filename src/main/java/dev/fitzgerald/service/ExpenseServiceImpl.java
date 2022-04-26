@@ -60,7 +60,11 @@ public class ExpenseServiceImpl implements ExpenseService {
      * */
     @Override
     public boolean updateExpense(Expense expense, int id) {
-        return this.expense.updateExpense(expense, id);
+        if(this.expense.getExpenseById(id).getStatus().compareTo("Pending") == 0) {
+            return this.expense.updateExpense(expense, id);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -84,6 +88,9 @@ public class ExpenseServiceImpl implements ExpenseService {
      * */
     @Override
     public boolean deleteExpense(int id) {
+        if(expense.getExpenseById(id).getStatus().compareTo("Pending") != 0){
+            return false;
+        }
         return expense.deleteExpense(id);
     }
 }

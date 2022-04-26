@@ -220,9 +220,13 @@ public class WebApp {
             int id = Integer.parseInt(context.pathParam("id"));
             Expense exp = expenseService.getExpenseById(id); //make sure it is in the table
             if(exp != null){
-                expenseService.deleteExpense(id);
-                context.result("Expense " + id + " deleted");
-                context.status(201);
+                if(expenseService.deleteExpense(id)) {
+                    context.result("Expense " + id + " deleted");
+                    context.status(201);
+                } else {
+                    context.status(409);
+                    context.result("Invalid expense");
+                }
             } else {
                 context.result("Expense not found");
                 context.status(404);
