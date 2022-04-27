@@ -20,6 +20,10 @@ public class WebApp {
 
     public static void main(String[] args){
         Javalin app = Javalin.create();
+        final String employeeURI1 = "/employees";
+        final String employeeURI2 = "/employees/{id}";
+        final String expenseURI1 = "/expenses";
+        final String expenseURI2 = "/expenses/{id}";
 
 
  //_______________Employee_Section_________________________________________
@@ -28,7 +32,7 @@ public class WebApp {
          * */
         //Create
         //Must use java end field names, not database
-        app.post("/employees", context -> {
+        app.post(employeeURI1, context -> {
             String body = context.body();
             Employee employee = gson.fromJson(body, Employee.class);
             services.createEmployee(employee);
@@ -42,7 +46,7 @@ public class WebApp {
          * Get all employees
          * */
         //Read all
-        app.get("/employees", context -> {
+        app.get(employeeURI1, context -> {
             List<Employee> emp = services.getAllEmployees();
             String emplJSON = gson.toJson(emp);
             context.result(emplJSON);
@@ -52,7 +56,7 @@ public class WebApp {
          * get one employee
          * */
         //read one
-        app.get("/employees/{id}", context ->{
+        app.get(employeeURI2, context ->{
             int id = Integer.parseInt(context.pathParam("id"));
             Employee employee = services.getEmployeeById(id);
             if(employee != null){
@@ -69,7 +73,7 @@ public class WebApp {
          * Update an employee object
          * */
         //Update employee
-        app.put("/employees/{id}", context -> {
+        app.put(employeeURI2, context -> {
             int id = Integer.parseInt(context.pathParam("id"));
             String body = context.body();
             Employee emp = gson.fromJson(body, Employee.class);
@@ -92,7 +96,7 @@ public class WebApp {
         * Delete an employee object
          * */
         //Delete employee
-        app.delete("/employees/{id}", context -> {
+        app.delete(employeeURI2, context -> {
             int id = Integer.parseInt(context.pathParam("id"));
             Employee emp = services.getEmployeeById(id); //make sure it is in the table
             if(emp != null){
@@ -117,7 +121,7 @@ public class WebApp {
          * Post an expense
          * */
         //post an expense
-        app.post("/expenses", context -> {
+        app.post(expenseURI1, context -> {
             String body = context.body();
             Expense expense = gson.fromJson(body, Expense.class);
             expenseService.createExpense(expense);
@@ -129,7 +133,7 @@ public class WebApp {
         /*
          * get an expense by id number
          * */
-        app.get("/expenses/{id}", context ->{
+        app.get(expenseURI2, context ->{
             int id = Integer.parseInt(context.pathParam("id"));
             if(expenseService.getExpenseById(id) != null) {
                 String expenseJSON = gson.toJson(expenseService.getExpenseById(id));
@@ -145,7 +149,7 @@ public class WebApp {
         /*
          * get all expenses expenses. contains filters
          * */
-        app.get("/expenses", context -> {
+        app.get(expenseURI1, context -> {
             String status = context.queryParam("approval");
             List<Expense> exp = expenseService.getAllExpenses();
             if(status == null){
@@ -166,7 +170,7 @@ public class WebApp {
         /*
          * Update an expense when in pending status
          * */
-        app.put("/expenses/{id}", context -> {
+        app.put(expenseURI2, context -> {
             int id = Integer.parseInt(context.pathParam("id"));
             String body = context.body();
             Expense exp = gson.fromJson(body, Expense.class);
@@ -216,7 +220,7 @@ public class WebApp {
         /*
          * Delete an expense item. Must be in pending status
          * */
-        app.delete("/expenses/{id}",context -> {
+        app.delete(expenseURI2,context -> {
             int id = Integer.parseInt(context.pathParam("id"));
             Expense exp = expenseService.getExpenseById(id); //make sure it is in the table
             if(exp != null){
