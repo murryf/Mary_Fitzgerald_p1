@@ -10,7 +10,7 @@ import java.util.List;
 public class ExpenseServiceImpl implements ExpenseService {
 
     private final ExpenseDAOPostgresImpl expense;
-    private final String okStatus = "Pending";
+    private static final String okStatus = "Pending";
 
     /**
      * Constructor for handler for an expense entity
