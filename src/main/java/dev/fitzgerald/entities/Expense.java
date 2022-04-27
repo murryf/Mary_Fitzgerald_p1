@@ -16,7 +16,7 @@ public class Expense {
     /**
      * Basic expense constructor. Sets status to Pending
      * */
-    public Expense(){status = "Pending";}
+    public Expense(){status = DEFAULTSTATUS;}
     /**
      * Main Expense constructor. Takes a String description and an amount to be reported.
      * @param description the description of the expense
