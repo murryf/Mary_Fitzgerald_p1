@@ -90,7 +90,7 @@ public class ExpenseDAOPostgresImpl implements ExpenseDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            List<Expense> expense = new ArrayList<Expense>();
+            List<Expense> expense = new ArrayList<>();
             while(rs.next()){
                 Expense exp = new Expense(0,"", 0);
                 exp.setExpenseID(rs.getInt("expense_id"));

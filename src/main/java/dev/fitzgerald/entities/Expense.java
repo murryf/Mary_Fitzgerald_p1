@@ -9,6 +9,9 @@ public class Expense {
     private String description;
     private double amount;
     private String status;
+    
+
+    private static final String defaultStatus = "Pending";
 
     /**
      * Basic expense constructor. Sets status to Pending
@@ -20,7 +23,7 @@ public class Expense {
      * @param amount the amount of the expense
      * */
     public Expense(int employeeSource, String description, double amount){
-        this.status = "Pending";
+        this.status = defaultStatus;
         this.employeeSource = employeeSource;
         this.description = description;
         this.amount = amount;
@@ -38,7 +41,7 @@ public class Expense {
      * does nothing if not in the correct status
      * @param description saved as the new description of an expense object */
     public void setDescription(String description) {
-        if(status.compareTo("Pending") == 0) {
+        if(status.compareTo(defaultStatus) == 0) {
             this.description = description;
         }
     }
@@ -55,7 +58,7 @@ public class Expense {
      * Method to set the amount of the expense if the expense is in pending state
      * @param amount the new ammount of the expense */
     public void setAmount(float amount) {
-        if (status.compareTo("Pending") == 0) {
+        if (status.compareTo(defaultStatus) == 0) {
             this.amount = amount;
         }
     }
@@ -72,7 +75,7 @@ public class Expense {
      * Method to set the status of an expense. May only be used once per expense
      * @param status the new status to be assigned */
     public void setStatus(String status) {
-        if(this.status.compareTo("Pending") == 0 || this.status.compareTo(null) == 0) {
+        if(this.status.compareTo(defaultStatus) == 0 || this.status.compareTo(null) == 0) {
             this.status = status;
         }
     }
@@ -89,7 +92,7 @@ public class Expense {
      * Method to set the expense ID of an expense object
      * @param expenseID the new expense ID */
     public void setExpenseID(int expenseID) {
-        if(status.compareTo("Pending") == 0) {
+        if(status.compareTo(defaultStatus) == 0) {
             this.expenseID = expenseID;
         }
     }
