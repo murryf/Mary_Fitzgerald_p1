@@ -24,7 +24,6 @@ public class Logger {
                     logMessage.getBytes(StandardCharsets.UTF_8),
                     StandardOpenOption.APPEND);
         } catch (IOException e) {
-            e.printStackTrace(); //Sensitive
         }
 
     }
