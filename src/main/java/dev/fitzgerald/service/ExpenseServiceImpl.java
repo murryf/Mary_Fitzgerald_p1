@@ -10,6 +10,7 @@ import java.util.List;
 public class ExpenseServiceImpl implements ExpenseService {
 
     private final ExpenseDAOPostgresImpl expense;
+    private final String okStatus = "Pending";
 
     /**
      * Constructor for handler for an expense entity
@@ -60,7 +61,7 @@ public class ExpenseServiceImpl implements ExpenseService {
      * */
     @Override
     public boolean updateExpense(Expense expense, int id) {
-        if(this.expense.getExpenseById(id).getStatus().compareTo("Pending") == 0) {
+        if(this.expense.getExpenseById(id).getStatus().compareTo(okStatus) == 0) {
             return this.expense.updateExpense(expense, id);
         } else {
             return false;
@@ -75,7 +76,7 @@ public class ExpenseServiceImpl implements ExpenseService {
      * */
     @Override
     public boolean updateExpenseStatus(int id, String status) {
-        if(expense.getExpenseById(id).getStatus().compareTo("Pending") == 0) {
+        if(expense.getExpenseById(id).getStatus().compareTo(okStatus) == 0) {
             return this.expense.updateExpenseStatus(id, status);
         } else {
             return false;
@@ -88,7 +89,7 @@ public class ExpenseServiceImpl implements ExpenseService {
      * */
     @Override
     public boolean deleteExpense(int id) {
-        if(expense.getExpenseById(id).getStatus().compareTo("Pending") != 0){
+        if(expense.getExpenseById(id).getStatus().compareTo(okStatus) != 0){
             return false;
         }
         return expense.deleteExpense(id);
