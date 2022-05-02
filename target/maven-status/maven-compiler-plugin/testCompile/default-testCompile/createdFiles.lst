@@ -1,0 +1,3 @@
+dev\fitzgerald\tests\connectiontests\ConnectionTest.class
+dev\fitzgerald\tests\daotests\EmployeeDAOTests.class
+dev\fitzgerald\tests\daotests\ExpenseDAOTests.class

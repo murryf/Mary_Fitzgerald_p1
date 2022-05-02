@@ -1,0 +1,57 @@
+CREATE database expensedb;
+
+create table expenses(
+	expense_id serial primary key,
+	employee_src int,
+	description varchar(500),
+	amount numeric(10,2),
+	approval varchar(10),
+	foreign key (employee_src) references employees(employee_id)
+);
+
+create table employees(
+	employee_id serial primary key,
+	fname varchar(20),
+	lname varchar(30)
+);
+drop table employees;
+drop table expenses ;
+
+select*from employees;
+select * from expenses;
+
+select * from expenses where approval = 'Pending'
+
+delete from employees where employee_id = 3;
+
+insert into employees values(default, 'Mark', 'Antony');
+insert into employees values(default, 'Julius', 'Orange');
+insert into employees values(default, 'Eddy', 'Murphy');
+insert into employees values(default, 'Joan', 'Arc');
+insert into employees values(default, 'Gilbert', 'Grape');
+insert into employees values(default, 'Anna', 'McFrozen');
+insert into employees values(default, 'Mega', 'Mind');
+insert into employees values(default, 'Foo', 'Bar');
+
+
+insert into expenses  values(default, 4,'dinner with client', 80.75);
+insert into expenses  values(default, 3,'Lunch', 9.99);
+insert into expenses  values(default, 2,'Overnight in Hilton', 280.75);
+insert into expenses  values(default, 1,'lunch with client', 40.75);
+insert into expenses  values(default, 8,'Car for day', 150.75);
+insert into expenses  values(default, 7,'Gift basket for auction', 150);
+insert into expenses  values(default, 6,'Movie Tickets for raffle', 35.75);
+insert into expenses  values(default, 5,'Coffee for 0ffice party', 50.75);
+insert into expenses  values(default, 4,'Train ticket', 16.50);
+insert into expenses  values(default, 3,'round trip flight to Chicago from Seattle', 880.75);
+
+update expenses set approval = 'Approved' where expense_id = 1;
+update expenses set approval = 'Pending' where expense_id = 2;
+update expenses set approval = 'Denied' where expense_id = 3;
+update expenses set approval = 'Denied' where expense_id = 4;
+update expenses set approval = 'Pending' where expense_id = 5;
+update expenses set approval = 'Approved' where expense_id = 6;
+update expenses set approval = 'Approved' where expense_id = 7;
+update expenses set approval = 'Pending' where expense_id = 8;
+update expenses set approval = 'Denied' where expense_id = 9;
+update expenses set approval = 'Pending' where expense_id = 10;
