@@ -52,6 +52,7 @@ An app for employees to claim expenses. Users can post their own expenses, and h
   - InteliJ
   - Java 8
  
+ ------
  To download this application, run "git clone https://github.com/murryf/Mary_Fitzgerald_p1.git"  in the command line shell of your choosing.
  
  The backend of this application can be reached at http://maryfitzgeraldp1-env.eba-rhwpi2pb.us-west-2.elasticbeanstalk.com through Postman. 
