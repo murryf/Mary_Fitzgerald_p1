@@ -1,2 +1,3 @@
 # Mary_Fitzgerald_p1
-A reimbursement app for employee expenses
+A reimbursement app for employee expenses using Spring
+
